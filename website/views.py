@@ -7,8 +7,13 @@ from django.contrib import messages
 def home(request):
     # Check to see if logging in
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
+
+        if not username or not password:
+            messages.error(request, "Please provide both username and password") 
+            return redirect('home')
+
         # Authenticate
         user = authenticate(request, username=username, password=password)
 
@@ -17,7 +22,7 @@ def home(request):
             messages.success(request, 'You have been logged in')
             return redirect('home')
         else:
-            messages.success(request, "There was an error logging in. Please try again...")
+            messages.error(request, "There was an error logging in. Please try again...")
             return redirect('home')
     else:
         return render(request, 'home.html', {})
