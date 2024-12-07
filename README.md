@@ -20,4 +20,4 @@ python manage.py startapp website
 python manage.py migrate
 
 
-python manage.py makemigration 
+python manage.py makemigrations
