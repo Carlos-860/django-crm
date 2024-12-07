@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib.sessions.models import Session
 from .forms import SignUpForm
+from .models import Record
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -29,7 +31,17 @@ def home(request):
             messages.error(request, "There was an error logging in. Please try again...")
             return redirect('home')
     else:
-        return render(request, 'home.html', {})
+        records = []
+        if request.user.is_authenticated:
+            try:
+                records_list = Record.objects.all().order_by('id')
+                paginator = Paginator(records_list, 10)
+                page = request.GET.get('page')
+                records = paginator.get_page(page)
+            except Exception as _:
+                messages.error(request, "Error fetching records")
+    
+        return render(request, 'home.html', { 'records': records})
 
 def login_user(request): # appended with _user in order to not conflict
     pass

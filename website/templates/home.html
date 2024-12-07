@@ -2,11 +2,85 @@
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+<div class="col-12 col-md-10 offset-md-1">
 
   {% if user.is_authenticated %}
 
-  <h1>Hello World!</h1>
+  <h1>Records</h1>
+
+  <p class="text-muted text-end" role="status" aria-live="polite">
+    Showing page {{ records.number }} of {{ records.paginator.num_pages }} ({{ records.paginator.count }} total records)
+  </p>
+
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Full name</th>
+        <th scope="col">Email Address</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col">Zip Code</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if records %}
+      {% for record in records %}
+      <tr>
+        <th scope="row">{{ record.id }}</th>
+        <td>{{ record.first_name|escape }} {{ record.last_name|escape }}</td>
+        <td>{{ record.email|escape }}</td>
+        <td>{{ record.phone|escape }}</td>
+        <td>{{ record.address|escape }}</td>
+        <td>{{ record.city|escape }}</td>
+        <td>{{ record.state|escape }}</td>
+        <td>{{ record.zip_code|escape }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="8">No records found.</td>
+      </tr>
+    {% endif %}
+    </tbody>
+  </table>
+  
+<!-- Bootstrap Pagination -->
+<div class="pagination justify-content-center">
+  <nav aria-label="Records navigation">
+  {% if records.has_previous %}
+    <a class="page-link" href="?page=1" aria-label="First Page">
+      <span aria-hidden="true">&laquo;&laquo;</span>
+      <span class="visually-hidden">First page</span>
+    </a>
+    <a class="page-link" href="?page={{ records.previous_page_number }}" aria-label="Previous Page">
+      <span aria-hidden="true">&laquo;</span>
+      <span class="visually-hidden">Previous page</span>
+    </a>
+  {% endif %}
+
+  <!-- Page Numbers -->
+  {% for num in records.paginator.page_range %}
+    {% if records.number == num %}
+      <span class="page-link active" aria-current="page">{{ num }}</span>
+    {% else %}
+      <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if records.has_next %}
+    <a class="page-link" href="?page={{ records.next_page_number }}" aria-label="Next">
+      <span aria-hidden="true">&raquo;</span>
+      <span class="visually-hidden">Next page</span>
+    </a>
+    <a class="page-link" href="?page={{ records.paginator.num_pages }}" aria-label="Last">
+      <span aria-hidden="true">&raquo;&raquo;</span>
+      <span class="visually-hidden">Last page</span>
+    </a>
+  {% endif %}
+</div>
 
   {% else %}
 
