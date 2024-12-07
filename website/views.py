@@ -77,6 +77,3 @@ def register_user(request):
         return render(request, 'register.html', {'form': form})
     
     return render(request, 'register.html', {'form': form})
-
-def customer_record(request, id):
-    return render(request, 'customer.html', {'id': id})
