@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.sessions.models import Session
 from .forms import SignUpForm
 from .models import Record
@@ -79,6 +79,7 @@ def register_user(request):
     
     return render(request, 'register.html', {'form': form})
 
+@require_http_methods(["GET"])
 def customer_record(request, pk):
     if request.user.is_authenticated:
         try:
