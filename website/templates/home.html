@@ -29,8 +29,8 @@
     {% if records %}
       {% for record in records %}
       <tr>
-        <th scope="row"><a href="{% url 'record' record.id %}">{{ record.id }}</a></th>
-        <td>{{ record.first_name|escape }} {{ record.last_name|escape }}</td>
+        <th scope="row"><a href="{% url 'record' record.id %}" aria-label="View details for {{ record.first_name|escape }} {{ record.last_name|escape }}">{{ record.id }}</a></th>
+        <td >{{ record.first_name|escape }} {{ record.last_name|escape }}</td>
         <td>{{ record.email|escape }}</td>
         <td>{{ record.phone|escape }}</td>
         <td>{{ record.address|escape }}</td>

@@ -6,7 +6,7 @@
   <h1>Customer Record</h1>
 
   <div class="card">
-    <div class="card-header">
+    <div class="card-header" id="customer-name">
       {{ customer_record.first_name|escape }} {{ customer_record.last_name|escape }}
     </div>
     <div class="card-body">
@@ -39,7 +39,7 @@
 
   <br /><br />
 
-  <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+  <a href="{% url 'home' %}" class="btn btn-secondary" aria-label="Back to Records List">Back</a>
 </div>
 
 {% endblock %}
