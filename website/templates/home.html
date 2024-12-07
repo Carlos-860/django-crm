@@ -30,13 +30,13 @@
       {% for record in records %}
       <tr>
         <th scope="row">{{ record.id }}</th>
-        <td>{{ record.first_name }} {{ record.last_name }}</td>
+        <td>{{ record.first_name|escape }} {{ record.last_name|escape }}</td>
         <td>{{ record.email|escape }}</td>
-        <td>{{ record.phone }}</td>
-        <td>{{ record.address }}</td>
-        <td>{{ record.city }}</td>
-        <td>{{ record.state }}</td>
-        <td>{{ record.zip_code }}</td>
+        <td>{{ record.phone|escape }}</td>
+        <td>{{ record.address|escape }}</td>
+        <td>{{ record.city|escape }}</td>
+        <td>{{ record.state|escape }}</td>
+        <td>{{ record.zip_code|escape }}</td>
       </tr>
       {% endfor %}
     {% else %}
