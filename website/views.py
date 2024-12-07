@@ -5,10 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.contrib.sessions.models import Session
 from .forms import SignUpForm
+from .models import Record
 
 # Create your views here.
 
 def home(request):
+    records = Record.objects.all()
+
     # Check to see if logging in
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
@@ -29,7 +32,7 @@ def home(request):
             messages.error(request, "There was an error logging in. Please try again...")
             return redirect('home')
     else:
-        return render(request, 'home.html', {})
+        return render(request, 'home.html', { 'records': records})
 
 def login_user(request): # appended with _user in order to not conflict
     pass
