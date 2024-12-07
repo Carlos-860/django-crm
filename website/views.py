@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 
 def home(request):
     try:
-        records_list = Record.objects.all().order_by('-id')
+        records_list = Record.objects.all().order_by('id')
         paginator = Paginator(records_list, 10)
         page = request.GET.get('page')
         records = paginator.get_page(page)
