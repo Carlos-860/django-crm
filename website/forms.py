@@ -27,17 +27,21 @@ class SignUpForm(UserCreationForm):
 
     password1 = forms.CharField(
         label="",
+        min_length=8,
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}),
         error_messages={
-            'required': 'Please provide a password.'
+            'required': 'Please provide a password.',
+            'min_length': 'Password must be at least 8 characters long.'
         },
     )
 
     password2 = forms.CharField(
         label="",
+        min_length=8,
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}),
         error_messages={
-            'required': 'Please confirm your password.'
+            'required': 'Please confirm your password.',
+            'min_length': 'Password must be at least 8 characters long.'
         },
     )
 
