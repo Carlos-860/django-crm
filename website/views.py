@@ -6,11 +6,19 @@ from django.views.decorators.http import require_POST
 from django.contrib.sessions.models import Session
 from .forms import SignUpForm
 from .models import Record
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 def home(request):
-    records = Record.objects.all()
+    try:
+        records_list = Record.objects.all().order_by('-id')
+        paginator = Paginator(records_list, 10)
+        page = request.GET.get('page')
+        records = paginator.get_page(page)
+    except Exception as e:
+        messages.error(request, "Error fetching records")
+        records = []
 
     # Check to see if logging in
     if request.method == 'POST':
@@ -69,3 +77,6 @@ def register_user(request):
         return render(request, 'register.html', {'form': form})
     
     return render(request, 'register.html', {'form': form})
+
+def customer_record(request, id):
+    return render(request, 'customer.html', {'id': id})
