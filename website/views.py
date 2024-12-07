@@ -11,15 +11,6 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 def home(request):
-    try:
-        records_list = Record.objects.all().order_by('id')
-        paginator = Paginator(records_list, 10)
-        page = request.GET.get('page')
-        records = paginator.get_page(page)
-    except Exception as e:
-        messages.error(request, "Error fetching records")
-        records = []
-
     # Check to see if logging in
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
@@ -40,6 +31,16 @@ def home(request):
             messages.error(request, "There was an error logging in. Please try again...")
             return redirect('home')
     else:
+        records = []
+        if request.user.is_authenticated:
+            try:
+                records_list = Record.objects.all().order_by('id')
+                paginator = Paginator(records_list, 10)
+                page = request.GET.get('page')
+                records = paginator.get_page(page)
+            except Exception as _:
+                messages.error(request, "Error fetching records")
+    
         return render(request, 'home.html', { 'records': records})
 
 def login_user(request): # appended with _user in order to not conflict
