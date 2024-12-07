@@ -2,20 +2,20 @@
 
 {% block content %}
 
-<div class="col-md-10 offset-md-1">
+<div class="col-12 col-md-10 offset-md-1">
 
   {% if user.is_authenticated %}
 
   <h1>Records</h1>
 
-  <p class="text-muted text-end">
+  <p class="text-muted text-end" role="status" aria-live="polite">
     Showing page {{ records.number }} of {{ records.paginator.num_pages }} ({{ records.paginator.count }} total records)
   </p>
 
   <table class="table table-striped table-hover table-bordered">
     <thead class="table-dark">
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">ID</th>
         <th scope="col">Full name</th>
         <th scope="col">Email Address</th>
         <th scope="col">Phone</th>
@@ -64,7 +64,7 @@
   <!-- Page Numbers -->
   {% for num in records.paginator.page_range %}
     {% if records.number == num %}
-      <span class="page-link active">{{ num }}</span>
+      <span class="page-link active" aria-current="page">{{ num }}</span>
     {% else %}
       <a class="page-link" href="?page={{ num }}">{{ num }}</a>
     {% endif %}
@@ -73,9 +73,11 @@
   {% if records.has_next %}
     <a class="page-link" href="?page={{ records.next_page_number }}" aria-label="Next">
       <span aria-hidden="true">&raquo;</span>
+      <span class="visually-hidden">Next page</span>
     </a>
     <a class="page-link" href="?page={{ records.paginator.num_pages }}" aria-label="Last">
       <span aria-hidden="true">&raquo;&raquo;</span>
+      <span class="visually-hidden">Last page</span>
     </a>
   {% endif %}
 </div>
