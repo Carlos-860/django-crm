@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="col-12 col-md-10 offset-md-1">
+  {% if user.is_authenticated %}
+
+  <h1>Customer Record</h1>
+
+  <div class="card">
+    <div class="card-header">
+      {{ customer_record.first_name|escape }} {{ customer_record.last_name|escape }}
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+        <strong>Email Address: </strong>{{ customer_record.email|escape }}
+      </p>
+      <p class="card-text">
+        <strong>Phone: </strong>{{ customer_record.phone|escape }}
+      </p>
+      <p class="card-text">
+        <strong>Address: </strong>{{ customer_record.address|escape }}
+      </p>
+      <p class="card-text">
+        <strong>City: </strong>{{ customer_record.city|escape }}
+      </p>
+      <p class="card-text">
+        <strong>State: </strong>{{ customer_record.state|escape }}
+      </p>
+      <p class="card-text">
+        <strong>Zipcode: </strong>{{ customer_record.zip_code|escape }}
+      </p>
+      <p class="card-text">
+        <strong>Created At: </strong>{{ customer_record.created_at }}
+      </p>
+      <p class="card-text"><strong>ID: </strong>{{ customer_record.id }}</p>
+    </div>
+  </div>
+
+  {% endif %}
+
+  <br /><br />
+
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+</div>
+
+{% endblock %}
