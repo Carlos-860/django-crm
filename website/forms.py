@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
         max_length=50,
         validators=[RegexValidator(r'^[a-zA-Z\s]*$', 'Only letters and spaces are allowed.')],
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
-        Strip=True
+        strip=True
     )
     
     last_name = forms.CharField(
@@ -22,7 +22,7 @@ class SignUpForm(UserCreationForm):
         max_length=50,
         validators=[RegexValidator(r'^[a-zA-Z\s]*$', 'Only letters and spaces are allowed.')],
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
-        Strip=True
+        strip=True
     )
 
     password1 = forms.CharField(
