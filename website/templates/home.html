@@ -29,7 +29,7 @@
     {% if records %}
       {% for record in records %}
       <tr>
-        <th scope="row">{{ record.id }}</th>
+        <th scope="row"><a href="{% url 'record' record.id %}">{{ record.id }}</a></th>
         <td>{{ record.first_name|escape }} {{ record.last_name|escape }}</td>
         <td>{{ record.email|escape }}</td>
         <td>{{ record.phone|escape }}</td>
