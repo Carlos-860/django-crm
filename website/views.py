@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.sessions.models import Session
-from .forms import SignUpForm
+from .forms import SignUpForm, AddRecordForm
 from .models import Record
 from django.core.paginator import Paginator
 
@@ -106,4 +106,17 @@ def delete_record(request, pk):
         return redirect('home') 
     except Exception as _:
         messages.error(request, "An error occurred while deleting the record")
+        return redirect('home')
+
+def add_record(request):
+    form = AddRecordForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                add_record = form.save()
+                messages.success(request, "Record Added...")
+                return redirect('home')
+        return render(request, 'add_record.html', {'form':form})
+    else:
+        messages.success(request, "You Must Be Logged In...")
         return redirect('home')
