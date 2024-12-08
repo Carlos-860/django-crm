@@ -92,3 +92,18 @@ def customer_record(request, pk):
     else:
         messages.error(request, "You must be logged in to view that page...")
         return redirect('home')    
+
+@require_POST
+@login_required
+def delete_record(request, pk):
+    try:
+        delete_it =  Record.objects.get(id=pk)
+        delete_it.delete()
+        messages.success(request, "Customer record deleted successfully")
+        return redirect('home')
+    except Record.DoesNotExist:
+        messages.error(request, "Record not found")
+        return redirect('home') 
+    except Exception as _:
+        messages.error(request, "An error occurred while deleting the record")
+        return redirect('home')
