@@ -104,3 +104,6 @@ def delete_record(request, pk):
     except Record.DoesNotExist:
         messages.error(request, "Record not found")
         return redirect('home') 
+    except Exception as _:
+        messages.error(request, "An error occurred while deleting the record")
+        return redirect('home')
