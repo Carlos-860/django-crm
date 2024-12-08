@@ -40,6 +40,8 @@
   <br /><br />
 
   <a href="{% url 'home' %}" class="btn btn-secondary" aria-label="Back to Records List">Back</a>
+
+  <a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger" aria-label="Delete Record">Delete</a>
 </div>
 
 {% endblock %}
