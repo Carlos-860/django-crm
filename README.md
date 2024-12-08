@@ -20,7 +20,7 @@ A basic CRM (Customer Relationship Management) application built using Django. T
 
 - Simple and clean interface for ease of use.
 
-Technolgoies Used:
+Technologies Used:
 
 - Backend: Django (Python)
 
@@ -39,7 +39,7 @@ git clone https://github.com/Carlos-860/django-crm.git
 cd django-crm
 ```
 
-2. Create a virtual enviroment
+2. Create a virtual environment
 
 Note: You must activate the virtual environment every time you open the command prompt to work on your project.
 
@@ -74,15 +74,15 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-7. Access the app: Open your browser and navigate to http://127.0.0.1:8000
+7. Access the app: Open your browser and navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ## Usage
 
 - Log in with your credentials to access the CRM dashboard.
 - Use the interface to manage customers:
-    - Create: Add new customer details.
-    - Read: View customer records.
-    - Update: Edit existing customer information.
-    - Delete: Remove customer records.
+- Create: Add new customer details.
+- Read: View customer records.
+- Update: Edit existing customer information.
+- Delete: Remove customer records.
 
-For administrative features, visit the Django admin panel at http://127.0.0.1:8000/admin.
+For administrative features, visit the Django admin panel at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)..
