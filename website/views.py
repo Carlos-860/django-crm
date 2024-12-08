@@ -108,15 +108,16 @@ def delete_record(request, pk):
         messages.error(request, "An error occurred while deleting the record")
         return redirect('home')
 
+@require_http_methods(["GET", "POST"])
+@login_required
 def add_record(request):
-    form = AddRecordForm(request.POST or None)
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            if form.is_valid():
-                add_record = form.save()
-                messages.success(request, "Record Added...")
-                return redirect('home')
-        return render(request, 'add_record.html', {'form':form})
+    if request.method == "POST":
+        form = AddRecordForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Record Added Successfully")
+            return redirect('home')
+        messages.error(request, "Please correct the errors below")
     else:
-        messages.success(request, "You Must Be Logged In...")
-        return redirect('home')
+        form = AddRecordForm()
+        return render(request, 'add_record.html', {'form': form})
