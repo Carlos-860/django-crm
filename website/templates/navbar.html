@@ -17,6 +17,9 @@
 
         {% if user.is_authenticated %}
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'add_record' %}">Add Record</a>
+        </li>
+        <li class="nav-item">
           <form action="{% url 'logout' %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="nav-link bg-transparent border-0">Logout</button>
