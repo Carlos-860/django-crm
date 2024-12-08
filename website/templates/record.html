@@ -45,6 +45,9 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-danger" aria-label="Delete Record">Delete</button>
   </form>
+
+  <a href="{% url 'update_record' customer_record.id %}" class="btn btn-primary" aria-label="Update Record">Update</a>
+
 </div>
 
 {% endblock %}
