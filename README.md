@@ -56,25 +56,42 @@ source venv\Scripts\activate # on Windows
 pip install -r requirements.txt
 ```
 
-4. Apply migrations
+4. Configure database settings:
+
+Create a `.env` file in the project root:
+
+```python
+DB_NAME=your_database_name
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_HOST=localhost
+DB_PORT=3306
+```
+
+Create the MySQL database:
+```sql
+CREATE DATABASE your_database_name;
+```
+
+5. Apply migrations
 
 ```bash
 python manage.py migrate
 ```
 
-5. Create a superuser (for admin access):
+6. Create a superuser (for admin access):
 
 ```bash
 python manage.py createsuperuser
 ```
 
-6. Start the server:
+7. Start the server:
 
 ```bash
 python manage.py runserver
 ```
 
-7. Access the app: Open your browser and navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000)
+8. Access the app: Open your browser and navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ## Usage
 
