@@ -78,12 +78,12 @@ class SignUpForm(UserCreationForm):
 class AddRecordForm(forms.ModelForm):
 	first_name = forms.CharField(required=True, max_length=50, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}), label="", validators=[RegexValidator(r'^[a-zA-Z\s]*$', 'Only letters and spaces are allowed.')],)
 	last_name = forms.CharField(required=True,  max_length=50, widget=forms.widgets.TextInput(attrs={"placeholder":"Last Name", "class":"form-control"}), label="", validators=[RegexValidator(r'^[a-zA-Z\s]*$', 'Only letters and spaces are allowed.')],)
-	email = forms.CharField(required=True, max_length=100, widget=forms.widgets.TextInput(attrs={"placeholder":"Email", "class":"form-control"}), label="")
-	phone = forms.CharField(required=True, max_length=15, widget=forms.widgets.TextInput(attrs={"placeholder":"Phone", "class":"form-control"}), label="")
+	email = forms.EmailField(required=True, max_length=100, widget=forms.widgets.EmailInput(attrs={"placeholder":"Email", "class":"form-control"}), label="")
+	phone = forms.CharField(required=True, max_length=15, widget=forms.widgets.TextInput(attrs={"placeholder":"Phone", "class":"form-control"}), label="", validators=[RegexValidator(r'^\+?1?\d{9,15}$', 'Enter a valid phone number.')],)
 	address = forms.CharField(required=True, max_length=100, widget=forms.widgets.TextInput(attrs={"placeholder":"Address", "class":"form-control"}), label="")
 	city = forms.CharField(required=True, max_length=50, widget=forms.widgets.TextInput(attrs={"placeholder":"City", "class":"form-control"}), label="")
 	state = forms.CharField(required=True, max_length=50, widget=forms.widgets.TextInput(attrs={"placeholder":"State", "class":"form-control"}), label="")
-	zip_code = forms.CharField(required=True, max_length=20, widget=forms.widgets.TextInput(attrs={"placeholder":"Zipcode", "class":"form-control"}), label="")
+	zip_code = forms.CharField(required=True, max_length=20, widget=forms.widgets.TextInput(attrs={"placeholder":"Zipcode", "class":"form-control"}), label="", validators=[RegexValidator(r'^\d{5}(-\d{4})?$', 'Enter a valid ZIP code.')],)
 
 	class Meta:
 		model = Record
